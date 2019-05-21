@@ -56,3 +56,8 @@
   - Player 1/2
   - \_\_\_ WIns!
 - hyperlink to repository?
+
+#### Stretch
+
+- Drag & drop tokens
+- Build AI player
