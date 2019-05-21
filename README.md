@@ -15,6 +15,30 @@
 
 21 May 2019
 
-- OO design Connect 4
+- OO design Connect 4 MVP
+- Plan coding process
 
 #
+
+### Objects + Properties
+
+Board
+
+-
+
+| Object | Properties               |
+| :----: | ------------------------ |
+| Player | represented by token     |
+|        | two unique players/game  |
+|        | choses column for drop   |
+| Board  | matrix? 7x6              |
+|        | knows token locations    |
+|        | prevents column overfill |
+|        | determines winner        |
+|        | can reset                |
+|        |                          |
+|        |                          |
+
+#
+
+### Project Plan
