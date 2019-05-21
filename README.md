@@ -43,11 +43,12 @@
 
 ### Project Plan
 
-#### Build underlying functionality to work in terminal
+#### Build underlying functionality
 
 - [x] Create newBoard function that creates 7x6 matrix populated with 0s
-- Create addToken function that drops token based on column input and turn
-- Create turn function that provides provides player turn
+- [x] Write function findRow to find first empty row in given column
+- [x] Create addToken function that adds token to board given column, player, and row
+- Create turn function that provides provides player turn?
 - Write function to determine if win exists
 
 #### Build web page interface with game functionality
