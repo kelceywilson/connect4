@@ -40,7 +40,8 @@
 
 #### Build underlying functionality to work in terminal
 
-- Create newBoard function that creates 7x6 matrix populated with 0s
+-[x] Create newBoard function that creates 7x6 matrix populated with 0s
+
 - Create turn function that provides provides player turn
 - Create addToken function that drops token based on column input and turn
 -
