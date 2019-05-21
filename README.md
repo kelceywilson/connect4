@@ -14,6 +14,7 @@
 
 - OO design Connect 4 MVP
 - Plan coding process
+- Follow plan
 
 #
 
@@ -45,23 +46,23 @@
 #### Build underlying functionality to work in terminal
 
 - [x] Create newBoard function that creates 7x6 matrix populated with 0s
-- [] Create addToken function that drops token based on column input and turn
-- [] Create turn function that provides provides player turn
-- [] Write function to determine if win exists
+- Create addToken function that drops token based on column input and turn
+- Create turn function that provides provides player turn
+- Write function to determine if win exists
 
 #### Build web page interface with game functionality
 
-- [] Build board representation probably with divs with ids
-- [] Represent empty board by default
-- [] Change affected cells using css
-- [] Maybe allow user to click column button to place token
-- [] Provide messaging
-  - [] Start new game?
-  - [] Player 1/2
-  - [] \_\_\_ WIns!
-- [] hyperlink to repository?
+- Build board representation probably with divs with ids
+- Represent empty board by default
+- Change affected cells using css
+- Maybe allow user to click column button to place token
+- Provide messaging
+  - Start new game?
+  - Player 1/2
+  - \_\_\_ WIns!
+- hyperlink to repository?
 
 #### Stretch
 
-- [] Drag & drop tokens
-- [] Build AI player
+- Drag & drop tokens
+- Build AI player
