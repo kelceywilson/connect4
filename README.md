@@ -22,10 +22,6 @@
 
 ### Objects + Properties
 
-Board
-
--
-
 | Object | Properties               |
 | :----: | ------------------------ |
 | Player | represented by token     |
@@ -37,8 +33,26 @@ Board
 |        | determines winner        |
 |        | can reset                |
 |        |                          |
-|        |                          |
 
 #
 
 ### Project Plan
+
+#### Build underlying functionality to work in terminal
+
+- Create newBoard function that creates 7x6 matrix populated with 0s
+- Create turn function that provides provides player turn
+- Create addToken function that drops token based on column input and turn
+-
+
+#### Build web page interface with game functionality
+
+- Build board representation probably with divs with ids
+- Represent empty board by default
+- Change affected cells using css
+- Maybe allow user to click column button to place token
+- Provide messaging
+  - Start new game?
+  - Player 1/2
+  - \_\_\_ WIns!
+- hyperlink to repository?
