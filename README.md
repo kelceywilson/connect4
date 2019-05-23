@@ -16,6 +16,13 @@
 - Plan coding process
 - Follow plan
 
+23 May 2019
+
+- Connect scripts to DOM to make app functional
+- Write function to determine if winner
+- Provide move feedback in DOM
+- Tweak design
+
 #
 
 ### Objects + Properties
@@ -53,8 +60,8 @@
 
 #### Build web page interface with game functionality
 
-- Build board representation probably with divs with ids
-- Represent empty board by default
+- [x] Build board representation probably with divs with ids
+- [x] Represent empty board by default
 - Change affected cells using css
 - Maybe allow user to click column button to place token
 - Provide messaging
@@ -65,5 +72,6 @@
 
 #### Stretch
 
+- Make responsive design
 - Drag & drop tokens
 - Build AI player
