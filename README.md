@@ -72,6 +72,6 @@
 
 #### Stretch
 
-- Make responsive design
+- Make more responsive design
 - Drag & drop tokens
 - Build AI player

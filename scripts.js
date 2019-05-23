@@ -20,8 +20,8 @@ function newBoard(height = 6, width = 7) {
 /**
  * Finds first empty row in selected column
  *
- * @param {*} board
- * @param {*} column
+ * @param {array} board
+ * @param {number} column
  * @returns Integer
  */
 function findRow(board, column) {
@@ -40,16 +40,19 @@ function findRow(board, column) {
 /**
  * Places current player's token on board
  *
- * @param {*} board
- * @param {*} player
- * @param {*} column
- * @param {*} row
+ * @param {array} board
+ * @param {number} player
+ * @param {number} column
+ * @param {number} row
  */
-function addToken(board, player, column, row) {
-  player === 1 ? 1 : 2;
+function addToken(board, player, row, column) {
   board[row][column] = player;
   return board;
 }
 
 const board = newBoard();
+console.log(board);
+
+addToken(board, 1, 5, 1);
+
 console.log(board);
