@@ -18,7 +18,8 @@
 
 23 May 2019
 
-- Connect scripts to DOM to make app functional
+- Create header elements with JavaScript in order to add event listeners at same time
+- Make DOM update in response to chip drops
 - Write function to determine if winner
 - Provide move feedback in DOM
 - Tweak design
