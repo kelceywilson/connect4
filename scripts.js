@@ -27,14 +27,16 @@ function newBoard(height = 6, width = 7) {
 function findRow(board, column) {
   let row;
   // Refactor for performance & best practices?
-  for (row = board.length - 1; row >= 0; row--) {
-    if (board[row][column] === 0) {
-      return row;
-    } else {
-      return "row already full";
+  for (row = 0; row < board.length; row++) {
+    if (board[row][column] !== 0) {
+      if (row === 0) {
+        return "full";
+      } else {
+        return row - 1;
+      }
     }
   }
-  return row;
+  return row - 1;
 }
 
 /**
@@ -45,14 +47,41 @@ function findRow(board, column) {
  * @param {number} column
  * @param {number} row
  */
-function addToken(board, player, row, column) {
+function addToken(board, player, column) {
+  let row = findRow(board, column);
+  console.log("board", board);
   board[row][column] = player;
   return board;
 }
 
-const board = newBoard();
-console.log(board);
+////////////////////////
+//   EVENT HANDLING   //
+////////////////////////
 
-addToken(board, 1, 5, 1);
+/**
+ * Colors header chips according to turn
+ *
+ * @param {number} turn
+ * @param {NodeList} drops
+ */
+function colorDropChip(board, player, drops) {
+  for (let i = 0; i < drops.length; i++) {
+    drops[i].className = `drop chip${player}`;
+    drops[i].addEventListener("click", function() {
+      console.log(board, player, i);
 
-console.log(board);
+      addToken(board, player, i);
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Reload page resets game board and starts with player 1
+  const board = newBoard();
+  let player = 1;
+  const drops = document.querySelectorAll(".drop");
+  colorDropChip(board, player, drops);
+
+  console.log(board);
+  // addToken(board, player, 5);
+});
