@@ -74,5 +74,6 @@
 #### Stretch
 
 - Make more responsive design
+- Build DOM with Javascript to allow different board sizes
 - Drag & drop tokens
 - Build AI player
