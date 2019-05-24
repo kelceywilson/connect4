@@ -56,15 +56,15 @@
 - [x] Create newBoard function that creates 7x6 matrix populated with 0s
 - [x] Write function findRow to find first empty row in given column
 - [x] Create addToken function that adds token to board given column, player, and row
-- Create turn function that provides provides player turn?
+- [x] Create turn function that provides provides player turn?
 - Write function to determine if win exists
 
 #### Build web page interface with game functionality
 
 - [x] Build board representation probably with divs with ids
 - [x] Represent empty board by default
-- Change affected cells using css
-- Maybe allow user to click column button to place token
+- [x] Change affected cells using css
+- [x] Maybe allow user to click column button to place token
 - Provide messaging
   - Start new game?
   - Player 1/2
