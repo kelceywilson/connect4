@@ -47,10 +47,11 @@ function findRow(board, column) {
  * @param {number} column
  * @param {number} row
  */
-function addToken(board, player, column) {
+function addToken(board, player, column, drops) {
   let row = findRow(board, column);
   console.log("board", board);
   board[row][column] = player;
+  colorCell(row, column, player);
   return board;
 }
 
@@ -61,16 +62,27 @@ function addToken(board, player, column) {
 /**
  * Colors header chips according to turn
  *
- * @param {number} turn
+ * @param {number} player
  * @param {NodeList} drops
  */
-function colorDropChip(board, player, drops) {
+function colorHeaderChips(drops, player) {
   for (let i = 0; i < drops.length; i++) {
     drops[i].className = `drop chip${player}`;
-    drops[i].addEventListener("click", function() {
-      console.log(board, player, i);
+  }
+}
 
+function colorCell(row, column, player) {
+  document.getElementById(`r${row}${column}`).className = `chip chip${player}`;
+}
+
+function dropToken(board, player, drops, turn) {
+  for (let i = 0; i < drops.length; i++) {
+    // colorHeaderChips(drops, player);
+    drops[i].addEventListener("click", function() {
       addToken(board, player, i);
+      player = player === 1 ? 2 : 1;
+      colorHeaderChips(drops, player);
+      turn++;
     });
   }
 }
@@ -78,10 +90,15 @@ function colorDropChip(board, player, drops) {
 document.addEventListener("DOMContentLoaded", function() {
   // Reload page resets game board and starts with player 1
   const board = newBoard();
+  let turn = 1;
   let player = 1;
   const drops = document.querySelectorAll(".drop");
-  colorDropChip(board, player, drops);
+  colorHeaderChips(drops, player);
 
+  // dropToken(board, player, drops, turn);
+
+  // const rows = document.querySelectorAll(".row");
+  // console.log(rows);
   console.log(board);
   // addToken(board, player, 5);
 });
