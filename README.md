@@ -18,8 +18,10 @@
 
 23 May 2019
 
-- Create header elements with JavaScript in order to add event listeners at same time
 - Make DOM update in response to chip drops
+
+25 May 2019
+
 - Write function to determine if winner
 - Provide move feedback in DOM
 - Tweak design
