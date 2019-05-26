@@ -23,6 +23,7 @@
 25 May 2019
 
 - Write function to determine if winner
+- Handle overfill of column
 - Provide move feedback in DOM
 - Tweak design
 
@@ -59,7 +60,7 @@
 - [x] Write function findRow to find first empty row in given column
 - [x] Create addToken function that adds token to board given column, player, and row
 - [x] Create turn function that provides provides player turn?
-- Write function to determine if win exists
+- [x] Write function to determine if win exists
 
 #### Build web page interface with game functionality
 
