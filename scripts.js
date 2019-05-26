@@ -14,6 +14,8 @@ function newBoard(height = 6, width = 7) {
       matrix[y][x] = 0;
     }
   }
+  // Last index will keep track of turn
+  matrix.push(1);
   return matrix;
 }
 
@@ -55,6 +57,63 @@ function addToken(board, player, column, drops) {
   return board;
 }
 
+function status(board) {
+  // Check for horizonatl win
+  for (let i = 0; i < 7; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (
+        (board[i][j] === 1 || board[i][j] === 2) &&
+        (board[i][j] === board[i][j + 1] &&
+          board[i][j + 1] === board[i][j + 2] &&
+          board[i][j + 2] === board[i][j + 3])
+      ) {
+        console.log("player", board[i][j], "wins");
+      }
+    }
+  }
+  // Check for vertical win
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 7; j++) {
+      if (
+        (board[i][j] === 1 || board[i][j] === 2) &&
+        (board[i][j] === board[i + 1][j] &&
+          board[i + 1][j] === board[i + 2][j] &&
+          board[i + 2][j] === board[i + 3][j])
+      ) {
+        console.log("player", board[i][j], "wins");
+      }
+    }
+  }
+  // Check for diagonal falling win
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (
+        (board[i][j] === 1 || board[i][j] === 2) &&
+        (board[i][j] === board[i + 1][j + 1] &&
+          board[i + 1][j + 1] === board[i + 2][j + 2] &&
+          board[i + 2][j + 2] === board[i + 3][j + 3])
+      ) {
+        console.log("player", board[i][j], "wins");
+      }
+    }
+  }
+  // Check for diagonal rising win
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (
+        (board[i][j + 3] === 1 || board[i][j + 3] === 2) &&
+        (board[i][j + 3] === board[i + 1][j + 2] &&
+          board[i + 1][j + 2] === board[i + 2][j + 1] &&
+          board[i + 2][j + 1] === board[i + 3][j])
+      ) {
+        console.log("player", board[i][j + 3], "wins");
+      }
+    }
+  }
+
+  // return `Player ${chip} Wins!`
+  // return  'Tie game!'
+}
 ////////////////////////
 //   EVENT HANDLING   //
 ////////////////////////
@@ -71,18 +130,29 @@ function colorHeaderChips(drops, player) {
   }
 }
 
+/**
+ * Color cell as played token
+ *
+ * @param {number} row
+ * @param {number} column
+ * @param {number} player
+ */
 function colorCell(row, column, player) {
   document.getElementById(`r${row}${column}`).className = `chip chip${player}`;
 }
 
-function dropToken(board, player, drops, turn) {
+function addListeners(board, player, drops) {
   for (let i = 0; i < drops.length; i++) {
-    // colorHeaderChips(drops, player);
     drops[i].addEventListener("click", function() {
       addToken(board, player, i);
+      status(board);
       player = player === 1 ? 2 : 1;
       colorHeaderChips(drops, player);
-      turn++;
+      // Add one to turn count
+      board[6]++;
+      if (board[6] === 43) {
+        alert("game over");
+      }
     });
   }
 }
@@ -90,15 +160,13 @@ function dropToken(board, player, drops, turn) {
 document.addEventListener("DOMContentLoaded", function() {
   // Reload page resets game board and starts with player 1
   const board = newBoard();
-  let turn = 1;
   let player = 1;
   const drops = document.querySelectorAll(".drop");
   colorHeaderChips(drops, player);
-
-  // dropToken(board, player, drops, turn);
+  addListeners(board, player, drops);
 
   // const rows = document.querySelectorAll(".row");
   // console.log(rows);
-  console.log(board);
+  // console.log(board);
   // addToken(board, player, 5);
 });
