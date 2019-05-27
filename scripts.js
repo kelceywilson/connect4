@@ -1,22 +1,24 @@
 /**
- * Creates new board
+ * Creates new 6x7 matrix of 0s
+ * representing the game board
  *
  * @param {number} [height=6]
  * @param {number} [width=7]
  * @returns Array
  */
-function newBoard(height = 6, width = 7) {
-  const matrix = [];
-
+function newBoard(board, height = 6, width = 7) {
+  board = [];
   for (let y = 0; y < height; y++) {
-    matrix[y] = [];
+    board[y] = [];
     for (var x = 0; x < width; x++) {
-      matrix[y][x] = 0;
+      board[y][x] = 0;
     }
   }
   // Last index will keep track of turn
-  matrix.push(1);
-  return matrix;
+  board.push(1);
+  console.log("newBoard", board);
+
+  return board;
 }
 
 /**
@@ -31,8 +33,10 @@ function findRow(board, column) {
   // Refactor for performance & best practices?
   for (row = 0; row < board.length; row++) {
     if (board[row][column] !== 0) {
+      // If top row of selected column is full, return -1
+      // to send error and reset addToken function
       if (row === 0) {
-        return "full";
+        return -1;
       } else {
         return row - 1;
       }
@@ -49,11 +53,22 @@ function findRow(board, column) {
  * @param {number} column
  * @param {number} row
  */
-function addToken(board, player, column, drops) {
+function addToken(board, player, column) {
   let row = findRow(board, column);
   console.log("board", board);
+  console.log("row", row);
   board[row][column] = player;
   colorCell(row, column, player);
+  // status(board);
+  // player = player === 1 ? 2 : 1;
+  // colorHeaderChips(drops, player);
+  // const messages = document.querySelector(".messages");
+  // messages.innerHTML = `Player ${player}'s Turn`;
+  // // Add one to turn count
+  // board[6]++;
+  // if (board[6] === 43) {
+  //   alert("game over");
+  // }
   return board;
 }
 
@@ -112,7 +127,6 @@ function status(board) {
   }
 
   // return `Player ${chip} Wins!`
-  // return  'Tie game!'
 }
 ////////////////////////
 //   EVENT HANDLING   //
@@ -141,13 +155,22 @@ function colorCell(row, column, player) {
   document.getElementById(`r${row}${column}`).className = `chip chip${player}`;
 }
 
+function resetAllCells() {
+  const allChips = document.querySelectorAll(".chip");
+  allChips.forEach(chip => {
+    chip.className = "chip chip0";
+  });
+}
+
 function addListeners(board, player, drops) {
   for (let i = 0; i < drops.length; i++) {
     drops[i].addEventListener("click", function() {
-      addToken(board, player, i);
+      board = addToken(board, player, i, drops);
       status(board);
       player = player === 1 ? 2 : 1;
       colorHeaderChips(drops, player);
+      const messages = document.querySelector(".messages");
+      messages.innerHTML = `Player ${player}'s Turn`;
       // Add one to turn count
       board[6]++;
       if (board[6] === 43) {
@@ -157,16 +180,29 @@ function addListeners(board, player, drops) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Reload page resets game board and starts with player 1
-  const board = newBoard();
+function newGame(board) {
   let player = 1;
+  board = newBoard();
   const drops = document.querySelectorAll(".drop");
   colorHeaderChips(drops, player);
   addListeners(board, player, drops);
+  // messages.innerHTML = "Player 1 - Click on a chip to drop into its column";
+  // restart.innerHTML = "RESTART GAME";
+}
 
-  // const rows = document.querySelectorAll(".row");
-  // console.log(rows);
-  // console.log(board);
-  // addToken(board, player, 5);
+document.addEventListener("DOMContentLoaded", function() {
+  board = newBoard();
+  const restart = document.getElementById("restart");
+  const messages = document.querySelector(".messages");
+  messages.innerHTML = "<div class='start'>Start New Game</div>";
+  const start = document.querySelector(".start");
+
+  start.addEventListener("click", function(board) {
+    newGame(board);
+  });
+
+  restart.addEventListener("click", function(board) {
+    resetAllCells();
+    newGame(board);
+  });
 });
