@@ -1,4 +1,4 @@
-# Connect 4 Game
+# Connect 4™ Game
 
 ## A simple game where you play Connect 4™ against yourself
 
@@ -23,8 +23,16 @@
 25 May 2019
 
 - Write function to determine if winner
-- Handle overfill of column
+
+26 May 2020
+
 - Provide move feedback in DOM
+
+27 May 2020
+
+- Fix double addToken after game reset bug
+  - Two instances of `board` exist
+- Handle overfill of column
 - Tweak design
 
 #
@@ -69,14 +77,15 @@
 - [x] Change affected cells using css
 - [x] Maybe allow user to click column button to place token
 - Provide messaging
-  - Start new game?
-  - Player 1/2
+  - [x] Start new game?
+  - [x] Player 1/2
   - \_\_\_ WIns!
 - hyperlink to repository?
 
 #### Stretch
 
 - Make more responsive design
+  - Mobile... second...
 - Build DOM with Javascript to allow different board sizes
 - Drag & drop tokens
 - Build AI player
