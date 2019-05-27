@@ -2,21 +2,38 @@ html {
   font-family: "Righteous", cursive;
 }
 
+body {
+  margin: 20px 30px;
+}
+
 .game {
-  border: 3px solid grey;
+  /* border: 3px solid grey; */
   display: flex;
-  margin: 10px 20px;
   flex-direction: column;
   height: 100%;
   width: 90%;
+  margin: 3px;
+}
+
+.game-border {
+  border: 3px solid grey;
+
 }
 
 .row {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  background-color: aqua;
   padding-bottom: 4px;
+  background-color: rgb(244, 250, 154);
+}
+
+.drop-row {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding-bottom: 4px;
+  /* background-color: yellow; */
 }
 
 .drop {
@@ -27,6 +44,16 @@ html {
   font-size: 0.8em;
   border-radius: 25px;
   box-shadow: 2px 4px grey;
+  display: flex;
+  /* background-color: white; */
+}
+
+#restart {
+  background-color: aqua;
+  height: 20px;
+  border-top: 3px solid grey;
+  display: flex;
+  justify-content: center;
 }
 
 .chip {
@@ -37,13 +64,41 @@ html {
 }
 
 .chip0 {
-  background-color: black;
+  background-color: rgb(59, 59, 59);
 }
 
 .chip1 {
-  background-color: yellow;
+  background-color: lightcoral;
 }
 
 .chip2 {
-  background-color: blue;
+  background-color: lightblue;
+}
+
+.flex {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* vertical-align: middle; */
+}
+
+.start {
+  background-color: greenyellow;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 3px 3px grey;
+}
+
+/* .none {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+} */
+
+.messages {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
 }
