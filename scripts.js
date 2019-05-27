@@ -6,8 +6,8 @@
  * @param {number} [width=7]
  * @returns Array
  */
-function newBoard(board, height = 6, width = 7) {
-  board = [];
+function newBoard(height = 6, width = 7) {
+  const board = [];
   for (let y = 0; y < height; y++) {
     board[y] = [];
     for (var x = 0; x < width; x++) {
@@ -55,8 +55,8 @@ function findRow(board, column) {
  */
 function addToken(board, player, column) {
   let row = findRow(board, column);
-  console.log("board", board);
-  console.log("row", row);
+  // console.log("board", board);
+  // console.log("row", row);
   board[row][column] = player;
   colorCell(row, column, player);
   // status(board);
@@ -155,17 +155,17 @@ function colorCell(row, column, player) {
   document.getElementById(`r${row}${column}`).className = `chip chip${player}`;
 }
 
-function resetAllCells() {
-  const allChips = document.querySelectorAll(".chip");
-  allChips.forEach(chip => {
-    chip.className = "chip chip0";
-  });
-}
+// function resetAllCells() {
+//   const allChips = document.querySelectorAll(".chip");
+//   allChips.forEach(chip => {
+//     chip.className = "chip chip0";
+//   });
+// }
 
 function addListeners(board, player, drops) {
   for (let i = 0; i < drops.length; i++) {
     drops[i].addEventListener("click", function() {
-      board = addToken(board, player, i, drops);
+      addToken(board, player, i, drops);
       status(board);
       player = player === 1 ? 2 : 1;
       colorHeaderChips(drops, player);
@@ -180,29 +180,27 @@ function addListeners(board, player, drops) {
   }
 }
 
-function newGame(board) {
+function newGame(messages, reset) {
   let player = 1;
   board = newBoard();
   const drops = document.querySelectorAll(".drop");
   colorHeaderChips(drops, player);
   addListeners(board, player, drops);
-  // messages.innerHTML = "Player 1 - Click on a chip to drop into its column";
-  // restart.innerHTML = "RESTART GAME";
+  messages.innerHTML = "Player 1 - Click on a chip to drop into its column";
+  reset.innerHTML = "RESET GAME";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  board = newBoard();
-  const restart = document.getElementById("restart");
   const messages = document.querySelector(".messages");
+  const reset = document.getElementById("reset");
   messages.innerHTML = "<div class='start'>Start New Game</div>";
   const start = document.querySelector(".start");
 
-  start.addEventListener("click", function(board) {
-    newGame(board);
+  start.addEventListener("click", function() {
+    newGame(messages, reset);
   });
 
-  restart.addEventListener("click", function(board) {
-    resetAllCells();
-    newGame(board);
+  reset.addEventListener("click", function() {
+    location = location;
   });
 });
