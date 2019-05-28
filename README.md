@@ -24,16 +24,19 @@
 
 - Write function to determine if winner
 
-26 May 2020
+26 May 2019
 
 - Provide move feedback in DOM
 
-27 May 2020
+27 May 2019
 
-- [x] Fix double addToken after game reset bug
+- Fix double addToken after game reset bug
   - Two instances of `board` exist
-- [x] Handle overfill of column
-- [x] Tweak design
+- Handle overfill of column
+- Tweak design
+
+28 May 2019
+
 - Refactor scripts
 
 #
