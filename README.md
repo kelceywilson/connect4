@@ -30,10 +30,11 @@
 
 27 May 2020
 
-- Fix double addToken after game reset bug
+- [x] Fix double addToken after game reset bug
   - Two instances of `board` exist
-- Handle overfill of column
-- Tweak design
+- [x] Handle overfill of column
+- [x] Tweak design
+- Refactor scripts
 
 #
 
@@ -79,7 +80,7 @@
 - Provide messaging
   - [x] Start new game?
   - [x] Player 1/2
-  - \_\_\_ WIns!
+  - [x] \_\_\_ WIns!
 - hyperlink to repository?
 
 #### Stretch
