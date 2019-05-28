@@ -55,21 +55,12 @@ function findRow(board, column) {
  */
 function addToken(board, player, column) {
   let row = findRow(board, column);
-  // console.log("board", board);
-  // console.log("row", row);
+  if (row === -1) {
+    return -1;
+  }
+
   board[row][column] = player;
   colorCell(row, column, player);
-  // status(board);
-  // player = player === 1 ? 2 : 1;
-  // colorHeaderChips(drops, player);
-  // const messages = document.querySelector(".messages");
-  // messages.innerHTML = `Player ${player}'s Turn`;
-  // // Add one to turn count
-  // board[6]++;
-  // if (board[6] === 43) {
-  //   alert("game over");
-  // }
-  return board;
 }
 
 function status(board) {
@@ -82,7 +73,7 @@ function status(board) {
           board[i][j + 1] === board[i][j + 2] &&
           board[i][j + 2] === board[i][j + 3])
       ) {
-        console.log("player", board[i][j], "wins");
+        return board[i][j];
       }
     }
   }
@@ -95,7 +86,7 @@ function status(board) {
           board[i + 1][j] === board[i + 2][j] &&
           board[i + 2][j] === board[i + 3][j])
       ) {
-        console.log("player", board[i][j], "wins");
+        return board[i][j];
       }
     }
   }
@@ -108,7 +99,7 @@ function status(board) {
           board[i + 1][j + 1] === board[i + 2][j + 2] &&
           board[i + 2][j + 2] === board[i + 3][j + 3])
       ) {
-        console.log("player", board[i][j], "wins");
+        return board[i][j];
       }
     }
   }
@@ -121,12 +112,11 @@ function status(board) {
           board[i + 1][j + 2] === board[i + 2][j + 1] &&
           board[i + 2][j + 1] === board[i + 3][j])
       ) {
-        console.log("player", board[i][j + 3], "wins");
+        return board[i][j + 3];
       }
     }
   }
-
-  // return `Player ${chip} Wins!`
+  return 0;
 }
 ////////////////////////
 //   EVENT HANDLING   //
@@ -155,31 +145,60 @@ function colorCell(row, column, player) {
   document.getElementById(`r${row}${column}`).className = `chip chip${player}`;
 }
 
-// function resetAllCells() {
-//   const allChips = document.querySelectorAll(".chip");
-//   allChips.forEach(chip => {
-//     chip.className = "chip chip0";
-//   });
-// }
-
+/**
+ *
+ *
+ */
+function resetAllCells() {
+  const allChips = document.querySelectorAll(".chip");
+  allChips.forEach(chip => {
+    chip.className = "chip chip0";
+  });
+}
+/**
+ *
+ *
+ * @param {*} board
+ * @param {*} player
+ * @param {*} drops
+ */
 function addListeners(board, player, drops) {
   for (let i = 0; i < drops.length; i++) {
     drops[i].addEventListener("click", function() {
-      addToken(board, player, i, drops);
-      status(board);
-      player = player === 1 ? 2 : 1;
-      colorHeaderChips(drops, player);
       const messages = document.querySelector(".messages");
-      messages.innerHTML = `Player ${player}'s Turn`;
-      // Add one to turn count
-      board[6]++;
-      if (board[6] === 43) {
-        alert("game over");
+      const errors = document.querySelector(".errors");
+      errors.innerHTML = "";
+
+      let error = addToken(board, player, i, drops);
+
+      if (error === -1) {
+        errors.innerHTML = "Column full. Choose another.";
+      } else {
+        let win = status(board);
+        if (win === 0) {
+          player = player === 1 ? 2 : 1;
+          colorHeaderChips(drops, player);
+          messages.innerHTML = `Player ${player}'s Turn`;
+          // Add one to turn count
+          board[6]++;
+          if (board[6] === 43) {
+            messages.innerHTML = "Game Over - Tie Game!";
+          }
+        } else {
+          errors.innerHTML = `Player ${win} Wins!`;
+          document.querySelectorAll(".drop").removeEventListener("click");
+        }
       }
     });
   }
 }
 
+/**
+ *
+ *
+ * @param {*} messages
+ * @param {*} reset
+ */
 function newGame(messages, reset) {
   let player = 1;
   board = newBoard();
