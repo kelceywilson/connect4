@@ -48,6 +48,16 @@ body {
 /* *************** */
 /* Message Styling */
 /* *************** */
+.errors {
+  color: red;
+}
+
+.messages {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+
 .start {
   background-color: greenyellow;
   border: none;
@@ -57,11 +67,6 @@ body {
   box-shadow: 3px 3px grey;
 }
 
-.messages {
-  display: flex;
-  justify-content: center;
-  padding: 25px;
-}
 
 /* ************ */
 /* Chip Styling */
