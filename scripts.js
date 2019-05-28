@@ -155,6 +155,7 @@ function resetAllCells() {
     chip.className = "chip chip0";
   });
 }
+
 /**
  *
  *
@@ -180,13 +181,14 @@ function addListeners(board, player, drops) {
           colorHeaderChips(drops, player);
           messages.innerHTML = `Player ${player}'s Turn`;
           // Add one to turn count
+          // If turn count reaches 43, no slots remain
           board[6]++;
           if (board[6] === 43) {
             messages.innerHTML = "Game Over - Tie Game!";
           }
         } else {
           errors.innerHTML = `Player ${win} Wins!`;
-          document.querySelectorAll(".drop").removeEventListener("click");
+          messages.innerHTML = "Game Over";
         }
       }
     });
@@ -199,10 +201,13 @@ function addListeners(board, player, drops) {
  * @param {*} messages
  * @param {*} reset
  */
-function newGame(messages, reset) {
+function newGame() {
   let player = 1;
-  board = newBoard();
+  let board = newBoard();
+  const messages = document.querySelector(".messages");
+  const reset = document.getElementById("reset");
   const drops = document.querySelectorAll(".drop");
+  // board = newBoard();
   colorHeaderChips(drops, player);
   addListeners(board, player, drops);
   messages.innerHTML = "Player 1 - Click on a chip to drop into its column";
@@ -210,14 +215,8 @@ function newGame(messages, reset) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  const messages = document.querySelector(".messages");
-  const reset = document.getElementById("reset");
-  messages.innerHTML = "<div class='start'>Start New Game</div>";
   const start = document.querySelector(".start");
-
-  start.addEventListener("click", function() {
-    newGame(messages, reset);
-  });
+  start.addEventListener("click", newGame);
 
   reset.addEventListener("click", function() {
     location = location;
