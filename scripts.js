@@ -16,7 +16,6 @@ function newBoard(height = 6, width = 7) {
   }
   // Last index will keep track of turn
   board.push(1);
-  console.log("newBoard", board);
 
   return board;
 }
