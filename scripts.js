@@ -46,7 +46,8 @@ function findRow(board, column) {
 }
 
 /**
- * Places current player's token on board
+ * Places current player's token in selected column if available
+ *  Returns error code if column is full
  *
  * @param {array} board
  * @param {number} player
@@ -63,6 +64,12 @@ function addToken(board, player, column) {
   colorCell(row, column, player);
 }
 
+/**
+ * Checks board for wins (four in sequence)
+ *
+ * @param {array} board
+ * @returns {number} 0 or number of winning player
+ */
 function status(board) {
   // Check for horizonatl win
   for (let i = 0; i < 7; i++) {
@@ -118,9 +125,10 @@ function status(board) {
   }
   return 0;
 }
-////////////////////////
-//   EVENT HANDLING   //
-////////////////////////
+
+//////////////////////////
+//   DOM MANIPULATION   //
+//////////////////////////
 
 /**
  * Colors header chips according to turn
@@ -130,7 +138,7 @@ function status(board) {
  */
 function colorHeaderChips(drops, player) {
   for (let i = 0; i < drops.length; i++) {
-    drops[i].className = `drop chip${player}`;
+    drops[i].className = `drop chip${player}-hover`;
   }
 }
 
@@ -146,7 +154,7 @@ function colorCell(row, column, player) {
 }
 
 /**
- *
+ * Empties board of any player chips
  *
  */
 function resetAllCells() {
@@ -157,7 +165,10 @@ function resetAllCells() {
 }
 
 /**
- *
+ * Does too many things:
+ *  Adds click event listeners to DROP CHIPs
+ *  Executes addToken on click
+ *  Provides messaging for various events
  *
  * @param {*} board
  * @param {*} player
@@ -189,6 +200,8 @@ function addListeners(board, player, drops) {
         } else {
           errors.innerHTML = `Player ${win} Wins!`;
           messages.innerHTML = "Game Over";
+          document.querySelector(".drop-row").className = "hidden";
+          document.querySelector(".flex").className = "flex margin";
         }
       }
     });
@@ -196,10 +209,8 @@ function addListeners(board, player, drops) {
 }
 
 /**
+ * Prepares board for new game with messaging and event listeners
  *
- *
- * @param {*} messages
- * @param {*} reset
  */
 function newGame() {
   let player = 1;
@@ -207,18 +218,23 @@ function newGame() {
   const messages = document.querySelector(".messages");
   const reset = document.getElementById("reset");
   const drops = document.querySelectorAll(".drop");
-  // board = newBoard();
-  colorHeaderChips(drops, player);
-  addListeners(board, player, drops);
+
   messages.innerHTML = "Player 1 - Click on a chip to drop into its column";
   reset.innerHTML = "RESET GAME";
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  const start = document.querySelector(".start");
-  start.addEventListener("click", newGame);
 
   reset.addEventListener("click", function() {
     location = location;
   });
+  colorHeaderChips(drops, player);
+  addListeners(board, player, drops);
+}
+
+/**
+ * Allows user to click button to start new game
+ *
+ */
+document.addEventListener("DOMContentLoaded", function() {
+  const start = document.querySelector(".start");
+
+  start.addEventListener("click", newGame);
 });
