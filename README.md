@@ -80,11 +80,11 @@
 - [x] Represent empty board by default
 - [x] Change affected cells using css
 - [x] Maybe allow user to click column button to place token
-- Provide messaging
+- [x] Provide messaging
   - [x] Start new game?
   - [x] Player 1/2
   - [x] \_\_\_ WIns!
-- hyperlink to repository?
+- [x] hyperlink to repository?
 
 #### Stretch
 
